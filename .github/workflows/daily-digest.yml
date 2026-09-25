@@ -31,20 +31,20 @@ jobs:
         run: pip install feedparser
 
       - name: Generate today's digest
-        run: python scripts/generate_digest.py
+        run: python daily-digest-free/scripts/generate_digest.py
 
       - name: Commit updated page
         run: |
           git config user.name "digest-bot"
           git config user.email "actions@github.com"
-          git add docs/index.html
+          git add daily-digest-free/docs/index.html
           git diff --quiet --cached || git commit -m "Update daily digest"
           git push
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: docs
+          path: daily-digest-free/docs
 
   deploy:
     needs: build-digest
